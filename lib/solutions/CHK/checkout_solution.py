@@ -21,7 +21,6 @@ STOCK_LIST_BY_SKUS = (
     )
 
 def get_discount_factor(discount_type):
-    breakpoint()
     if discount_type == Offers.BUY_3A_FOR_130.value[0]:
         # Hard coded for now
         return 3, 30
@@ -34,8 +33,6 @@ def get_discount_factor(discount_type):
 
 def apply_discount_factor(stock_item, counter: int):
     discount_factor, discounted_price = get_discount_factor(stock_item[2])
-
-    breakpoint()
 
     if discount_factor:
         if counter % discount_factor == 0:
@@ -63,6 +60,7 @@ def checkout(skus):
     except Exception as e:
         breakpoint()
         return -1
+
 
 
 

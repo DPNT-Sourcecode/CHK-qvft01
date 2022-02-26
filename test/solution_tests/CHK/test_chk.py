@@ -2,19 +2,18 @@ from tabnanny import check
 from solutions.CHK import checkout_solution
 
 def test_add_item_to_checkout():
-    skus = 'AAA'
+    skus = 'A'
     cart = checkout_solution.checkout(skus)
     assert 50 == cart
 
-
-def test_attempt_to_add_non_existant_item():
-    skus = 1
-    checkout_solution.checkout(skus)
+    skus = 'AA'
+    cart = checkout_solution.checkout(skus)
+    assert 100 == cart
 
 def test_add_multiple_to_checkout():
     skus = 'ABCD'
 
-    checkout_solution.checkout(skus)
+    assert 115 == checkout_solution.checkout(skus)
 
 def test_special_offers_buy_2():
     skus = 'B'
@@ -32,5 +31,11 @@ def test_special_offers_buy_3():
 
     skus = 'AA'
     assert 130 == checkout_solution.checkout(skus)
+
+def test_multiple_product_discounts():
+    skus = 'AAABBAAA'
+
+    assert 305 == checkout_solution.checkout(skus)
+
 
 
