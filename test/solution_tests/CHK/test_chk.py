@@ -2,7 +2,7 @@ from tabnanny import check
 from solutions.CHK import checkout_solution
 
 def test_add_item_to_checkout():
-    skus = 'A'
+    skus = 'AAA'
     cart = checkout_solution.checkout(skus)
     assert 50 == cart
 
@@ -32,4 +32,5 @@ def test_special_offers_buy_3():
 
     skus = 'AA'
     assert 130 == checkout_solution.checkout(skus)
+
 
