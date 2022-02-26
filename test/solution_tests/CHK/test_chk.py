@@ -3,7 +3,8 @@ from solutions.CHK import checkout_solution
 
 def test_add_item_to_checkout():
     skus = 'A'
-    assert 50 == checkout_solution.checkout(skus)
+    cart = checkout_solution.checkout(skus)
+    assert 50 == cart
 
 def test_attempt_to_add_non_existant_item():
     skus = 1
@@ -30,3 +31,4 @@ def test_special_offers_buy_3():
 
     skus = 'A, A, A'
     assert 130 == checkout_solution.checkout(skus)
+

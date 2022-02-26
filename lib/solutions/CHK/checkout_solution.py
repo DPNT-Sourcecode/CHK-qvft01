@@ -28,6 +28,7 @@ STOCK_LIST_BY_SKUS = (
 
 def validate_item_in_stock(sku):
     for stock_item in STOCK_LIST_BY_SKUS:
+        breakpoint()
         if sku in stock_item:
             return 0
 
@@ -50,25 +51,24 @@ def checkout(skus):
     skus_to_list = skus.split(',')
 
     cart = []
+
+    breakpoint()
     
     try:
         for sku in skus_to_list:
             for stock_item in STOCK_LIST_BY_SKUS:
-                local_stock_count = []
                 label = stock_item[0]
                 if label == sku:
-                    local_stock_count.push(sku)
-                    offer = stock_item[3]
-                    if offer:
-                        price += apply_offer(offer, len(local_stock_count))
+                    cart.push({ sku: stock_item[1] })
 
-                            
-                    price += stock_item[1]
+        breakpoint()
         
         return price
 
-    except Exception:
+    except Exception as e:
+        breakpoint()
         return -1
+
 
 
 
