@@ -117,6 +117,8 @@ class ShoppingCart:
 
     
 
+class InvalidInputException(Exception):
+    pass
 
     
 
@@ -136,6 +138,16 @@ def checkout(skus: str):
         Returns int price
     """
 
+    try:
+        cart = ShoppingCart()
+        allowed_input_values = ["".join(key) for key in cart.products.keys()]
+
+        if not all(allowed_string in allowed_input_values for allowed_string in skus):
+            raise InvalidInputException()    
+        incoming_skus = ["".join(group) for _, group in groupby(sorted(skus))]    
+    except Exception:
+        pass
+
     incoming_skus = ["".join(group) for _, group in groupby(sorted(skus))]
     price = 0
     try:
@@ -150,6 +162,7 @@ def checkout(skus: str):
 
     except Exception:
         return -1
+
 
 
 
