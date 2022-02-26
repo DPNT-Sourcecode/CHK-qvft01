@@ -16,7 +16,6 @@ class TestSum():
         with pytest.raises(ValidationException):
             sum_solution.compute(200, 300)
 
-
-
-
-
+    def test_sum_validates_arguments_as_strings(self):
+        with pytest.raises(ValidationException):
+            sum_solution.compute("200", "300")

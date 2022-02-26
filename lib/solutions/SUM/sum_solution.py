@@ -41,7 +41,3 @@ def compute(x: int, y: int) -> int:
         logging.exception(validation_error)
         raise
 
-
-
-
-
