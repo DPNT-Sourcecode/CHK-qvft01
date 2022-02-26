@@ -1,11 +1,19 @@
 # noinspection PyShadowingBuiltins,PyUnusedLocal
+import logging
+
+logger = logging.
 
 class ValidationError(Exception):
     pass
 
 def validate_inputs_int(x, y):
-    if isinstance(x, int)
-    if 0 <= x <= 100 and 0 <= y <= 100:
+    if isinstance(x, int) and isinstance(y, int):
+        if 0 <= x <= 100 and 0 <= y <= 100:
+            return True
+
+        raise ValidationError("Numbers are out of range, values must be a positive int >= to 100")
+    
+    raise ValidationError("Non-integer detected")
 
 def compute(x: int, y: int) -> int:
     """
@@ -25,9 +33,14 @@ def compute(x: int, y: int) -> int:
         The summed value
     """
 
-    if 0 <= x <= 100 and 0 <= y <= 100:
+    try:
+
+        validate_inputs_int(x, y)
+
         return x + y
-    
-    raise NotImplementedError()
+    except ValidationError:
+        raise
+    except Exception()
+
 
 
