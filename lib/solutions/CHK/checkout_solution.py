@@ -44,7 +44,7 @@ class LoadingFactors:
         product['total_price'] += product['price']
 
     def process_B_discounts(self, product, product_list=None):
-        if product['quantity'] == 3:
+        if product['quantity'] == 2:
             get_discount_for_product = self.discount_list['2B']
             discount_to_apply = get_discount_for_product['discount']
             product['total_price'] = 0
@@ -117,7 +117,7 @@ class ShoppingCart:
             'E': {
                 'price': 40,
                 'quantity': 0,
-                'discounted_items': 0,
+                'total_price': 0,
                 'loading_factor': loading_factors.process_E_discounts
             }
         }

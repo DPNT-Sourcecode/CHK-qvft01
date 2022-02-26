@@ -1,15 +1,6 @@
 import pytest
 from solutions.CHK import checkout_solution
 
-def test_add_item_to_checkout():
-    skus = 'A'
-    cart = checkout_solution.checkout(skus)
-    assert 50 == cart
-
-    skus = 'AA'
-    cart = checkout_solution.checkout(skus)
-    assert 100 == cart
-
 def test_add_multiple_to_checkout():
     skus = 'ABCD'
 
@@ -44,7 +35,7 @@ def test_special_offers_buy_3():
 def test_multiple_product_discounts():
     skus = 'AAABBAAA'
 
-    assert 305 == checkout_solution.checkout(skus)
+    assert 295 == checkout_solution.checkout(skus)
 
 def test_catch_invalid_input():
     assert -1 == checkout_solution.checkout("1234")
@@ -54,9 +45,9 @@ def test_catch_invalid_input():
 def test_summing_new_product():
     skus = 'AAAAAAEEEE'
 
-    assert 420 == checkout_solution.checkout(skus)
+    assert 410 == checkout_solution.checkout(skus)
 
 def test_shared_discount_applied_for_E_product():
     skus = 'AAAAAABBEE'
 
-    assert 355 == checkout_solution.checkout(skus)
+    assert 345 == checkout_solution.checkout(skus)
