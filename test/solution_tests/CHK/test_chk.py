@@ -1,4 +1,4 @@
-from tabnanny import check
+import pytest
 from solutions.CHK import checkout_solution
 
 def test_add_item_to_checkout():
@@ -36,4 +36,12 @@ def test_multiple_product_discounts():
     skus = 'AAABBAAA'
 
     assert 305 == checkout_solution.checkout(skus)
+
+def test_catch_invalid_input():
+
+    with pytest.raises(Exception):
+        id = checkout_solution.checkout("invalid string")
+
+    assert id == -1
+
 
