@@ -8,8 +8,8 @@ from itertools import groupby
 from enum import Enum
 
 class Offers(Enum):
-    BUY_3A_FOR_130 = 'BUY_3A_FOR_130',
-    BUY_2A_FOR_45 = 'BUY_2A_FOR_45',
+    BUY_3A_FOR_130 = '3A for 130',
+    BUY_2A_FOR_45 = '2B for 45',
 
 
 
@@ -22,22 +22,23 @@ STOCK_LIST_BY_SKUS = (
 
 def get_discount_factor(discount_type):
     breakpoint()
-    if discount_type == Offers.BUY_3A_FOR_130.value:
+    if discount_type == Offers.BUY_3A_FOR_130.value[0]:
         # Hard coded for now
         return 3, 30
     
-    if discount_type == Offers.BUY_2A_FOR_45.value:
+    if discount_type == Offers.BUY_2A_FOR_45.value[0]:
         return 2, 15
+
+    return None
 
 
 def apply_discount_factor(stock_item, counter: int):
-    breakpoint()
     discount_factor, discounted_price = get_discount_factor(stock_item[2])
 
     breakpoint()
 
     if discount_factor:
-        if counter % counter == 0:
+        if counter % discount_factor == 0:
             return discounted_price
         else:
             return stock_item[1]
@@ -62,6 +63,7 @@ def checkout(skus):
     except Exception as e:
         breakpoint()
         return -1
+
 
 
 
