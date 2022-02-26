@@ -38,7 +38,8 @@ def test_multiple_product_discounts():
     assert 305 == checkout_solution.checkout(skus)
 
 def test_catch_invalid_input():
-    assert -1 == checkout_solution.checkout("AA")
+    assert -1 == checkout_solution.checkout("1234")
+
 
 
 
