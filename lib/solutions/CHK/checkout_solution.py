@@ -3,6 +3,8 @@
 # noinspection PyUnusedLocal
 # skus = unicode string
 
+from itertools import groupby
+
 from enum import Enum
 
 class Offers(Enum):
@@ -18,63 +20,22 @@ STOCK_LIST_BY_SKUS = (
         ('D', 15, None)
     )
 
-# STOCK_LIST = [
-#     {'sku': 'A', 'price': 50, 'offer': '3A for 130'},
-#     {'sku': 'B', 'price': 30, 'offer': '3A for 130'},
-#     {'sku': 'C', 'price': 20, 'offer': None},
-#     {'sku': 'D', 'price': 15, 'offer': None},
+def get_discount_factor(discount_type):
+    if discount_type == 
 
-# ]
-
-def validate_item_in_stock(sku):
-    for stock_item in STOCK_LIST_BY_SKUS:
-        breakpoint()
-        if sku in stock_item:
-            return 0
-
-        raise Exception("Invalid input")
-
-def apply_offer(offer, count):
-    if offer == Offers.BUY_3A_FOR_130.value:
-        if count % 3:
-            return 130
-        return None
-
-    if offer == Offers.BUY_2A_FOR_45.value:
-        if count % 2:
-            return 45
-        return None
-
-def calculate_price(list):
-    final_price = 0
-    for item in list:
-        breakpoint()
-        final_price += item.values()
-
-    return final_price
-
-def add_to_cart(cart, label, price):
-
-    for existing_item in cart:
-        if label in existing_item.keys():
-            breakpoint()
-        breakpoint()
         
     
 
 def checkout(skus):
-    skus_to_list = skus.split(',')
-
-    cart = [{ 'A': 50 }]
-    
+    # Sort into seperate lists
+    incoming_skus = ["".join(group) for _, group in groupby(sorted(skus))]
     try:
-        for sku in skus_to_list:
-            for stock_item in STOCK_LIST_BY_SKUS:
-                label = stock_item[0]
-                if label == sku:
-                    add_to_cart(cart, sku, stock_item[1])
 
-        price = calculate_price(cart)
+        for stock_item in STOCK_LIST_BY_SKUS:
+            for skus in incoming_skus:
+                if stock_item[0] == skus[0]:
+                    # process logic
+
         breakpoint()
         
         return price
@@ -82,4 +43,5 @@ def checkout(skus):
     except Exception as e:
         breakpoint()
         return -1
+
 
