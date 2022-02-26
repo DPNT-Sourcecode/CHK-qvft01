@@ -177,7 +177,3 @@ def checkout(skus: str):
     except (Exception, InvalidInputException) as e:
         return -1
 
-
-
-
-
