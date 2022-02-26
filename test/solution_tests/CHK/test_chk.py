@@ -41,3 +41,13 @@ def test_catch_invalid_input():
     assert -1 == checkout_solution.checkout("1234")
     assert -1 == checkout_solution.checkout("ABCa")
     assert -1 == checkout_solution.checkout("AxA")
+
+def test_summing_new_product():
+    skus = 'AAAAAAEEEE'
+
+    assert 420 == checkout_solution.checkout(skus)
+
+def test_shared_discount_applied_for_E_product():
+    skus = 'AAAAAABBEE'
+
+    assert 355 == checkout_solution.checkout(skus)

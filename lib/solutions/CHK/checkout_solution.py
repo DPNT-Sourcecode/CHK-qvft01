@@ -49,6 +49,7 @@ class ShoppingCart:
             'A': {
                 'rule': 3,
                 'discount_percent': 60,
+                'shared_products': None,
             },
             'B': {
                 'rule': 2,
