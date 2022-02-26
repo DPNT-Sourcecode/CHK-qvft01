@@ -92,24 +92,25 @@ class ShoppingCart:
         self._apply_discount(product, item)
 
     def _apply_discount(self, product: object, item: str) -> None:
-        get_discount_for_product = self.discount_list.get(item, None)
+        get_discount_for_product = self.discount_list.get(item, None).get('rules', None)
 
         if get_discount_for_product:
             for rule in get_discount_for_product:
-                
-            if product["quantity"] % get_discount_for_product["rule"] == 0:
-                percentage = get_discount_for_product["discount_percent"]
-                shared_products = get_discount_for_product["shared_products"]
+                breakpoint()
+                if product["quantity"] % rule["rule"] == 0:
+                    breakpoint()
+                    percentage = rule["discount_percent"]
+                    shared_products = rule["shared_products"]
 
-                if percentage:
-                    discount = int((product["price"] * percentage) / 100)
-                    self.total += discount
+                    if percentage:
+                        discount = int((product["price"] * percentage) / 100)
+                        self.total += discount
 
-                if shared_products:
-                    self._apply_shared_discount(product, shared_products)
+                    if shared_products:
+                        self._apply_shared_discount(product, shared_products)
 
-            else:
-                self.total += product["price"] * 1
+                else:
+                    self.total += product["price"] * 1
         else:
             self.total += product["price"] * 1
 
@@ -161,4 +162,5 @@ def checkout(skus: str):
         return cart.total
     except (Exception, InvalidInputException) as e:
         return -1
+
 
