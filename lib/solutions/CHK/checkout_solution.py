@@ -53,11 +53,12 @@ def calculate_price(list):
 
     return final_price
 
-def add_to_cart(cart, item):
+def add_to_cart(cart, label, price):
 
     for existing_item in cart:
-        if item.keys() in existing_item:
+        if label in existing_item.keys():
             breakpoint()
+        breakpoint()
         
     
 
@@ -71,7 +72,7 @@ def checkout(skus):
             for stock_item in STOCK_LIST_BY_SKUS:
                 label = stock_item[0]
                 if label == sku:
-                    cart.append({ sku: stock_item[1] })
+                    add_to_cart(cart, sku, stock_item[1])
 
         price = calculate_price(cart)
         breakpoint()
@@ -81,5 +82,6 @@ def checkout(skus):
     except Exception as e:
         breakpoint()
         return -1
+
 
 
