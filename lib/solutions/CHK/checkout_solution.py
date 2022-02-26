@@ -10,13 +10,13 @@ STOCK_LIST_BY_SKUS = (
         ('D', 15, None)
     )
 
-STOCK_LIST = [
-    {'sku': 'A', 'price': 50, 'offer': '3A for 130'},
-    {'sku': 'B', 'price': 30, 'offer': '3A for 130'},
-    {'sku': 'C', 'price': 20, 'offer': None},
-    {'sku': 'D', 'price': 15, 'offer': None},
+# STOCK_LIST = [
+#     {'sku': 'A', 'price': 50, 'offer': '3A for 130'},
+#     {'sku': 'B', 'price': 30, 'offer': '3A for 130'},
+#     {'sku': 'C', 'price': 20, 'offer': None},
+#     {'sku': 'D', 'price': 15, 'offer': None},
 
-]
+# ]
 
 def validate_item_in_stock(sku):
     for stock_item in STOCK_LIST_BY_SKUS:
@@ -24,6 +24,8 @@ def validate_item_in_stock(sku):
             return 0
 
         raise Exception("Invalid input")
+
+def special_offers
     
 
 def checkout(skus):
@@ -35,11 +37,14 @@ def checkout(skus):
             for stock_item in STOCK_LIST_BY_SKUS:
                 label = stock_item[0]
                 if label == sku:
+                    if stock_item[3]:
+
                     price += stock_item[1]
         
         return price
 
     except Exception:
         return -1
+
 
 
