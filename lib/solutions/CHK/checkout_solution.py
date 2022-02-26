@@ -54,6 +54,12 @@ class LoadingFactors:
 
         product['total_price'] += product['price']
 
+    def process_C_discounts(self, product, product_list=None):
+        product['total_price'] += product['price']
+
+    def process_D_discounts(self, product, product_list=None):
+        product['total_price'] += product['price']
+
     def process_E_discounts(self, product, product_list):
         if product['quantity'] == 2:
             if product_list['B']['quantity'] >= 1:
@@ -100,11 +106,13 @@ class ShoppingCart:
                 'price': 20,
                 'quantity': 0,
                 'total_price': 0,
+                'loading_factor': loading_factors.process_C_discounts
             },
             'D': {
                 'price': 15,
                 'quantity': 0,
                 'total_price': 0,
+                'loading_factor': loading_factors.process_D_discounts
             },
             'E': {
                 'price': 40,
@@ -124,48 +132,7 @@ class ShoppingCart:
 
         self.shopping_cart.update({ item: product })
 
-        self._apply_discount(product, item)
-
-    
-    def _apply_discount(self, product: object, item: str) -> None:
-        discounted_count = product['discounted_items']
-        breakpoint()
-        get_discount_for_product = self.discount_list.get(f'{discounted_count}{item}', None)
-
-        if get_discount_for_product:
-            if product['quantity'] % get_discount_for_product['rule'] == 0:
-                percentage = get_discount_for_product['discount_percent']
-                shared_products = get_discount_for_product['shared_products']
-                
-                if percentage:
-                    discount = int((product['price'] * percentage) / 100)
-                    self.total += discount
-
-                if shared_products:
-                    self._apply_shared_discount(product, shared_products)
-
-                product.update({ **product, 'discounted_items': 0 })
-
-            else:
-                self.total += product['price'] * 1
-                product.update({ **product, 'discounted_items': discounted_count + 1 })
-        else:
-            self.total += product['price'] * 1
-            product.update({ **product, 'discounted_items': discounted_count + 1 })
-
-    def _apply_shared_discount(self, product, shared_products):
-        shared_products_keys = shared_products.keys()
-        for shared_item in shared_products_keys:
-            try:
-                target_shared_product = self.shopping_cart[shared_item]
-                if shared_products[shared_item]['action'] == '1 free':
-                    self.total += product['price']
-                    self.total -= target_shared_product['price']
-            except KeyError:
-                self.total += product['price']
-
-
-
+        product['loading_factor'](product, self.products)
     
 
 class InvalidInputException(Exception):
@@ -202,9 +169,14 @@ def checkout(skus: str):
             for _, item in enumerate(sublist):
                 cart.add_item(item)
 
+        
+        for product in allowed_input_values:
+            cart.total += cart.products[product]['total_price']
+
         return cart.total
     except (Exception, InvalidInputException) as e:
         return -1
+
 
 
 
