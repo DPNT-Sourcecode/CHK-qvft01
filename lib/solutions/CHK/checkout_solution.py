@@ -105,12 +105,14 @@ class ShoppingCart:
                 if shared_products:
                     self._apply_shared_discount(product, shared_products)
 
-                product.update({ **product, discounted_items })
+                product.update({ **product, 'discounted_items': 0 })
 
             else:
                 self.total += product['price'] * 1
+                product.update({ **product, 'discounted_items': discounted_count + 1 })
         else:
             self.total += product['price'] * 1
+            product.update({ **product, 'discounted_items': discounted_count + 1 })
 
     def _apply_shared_discount(self, product, shared_products):
         shared_products_keys = shared_products.keys()
@@ -164,6 +166,7 @@ def checkout(skus: str):
         return cart.total
     except (Exception, InvalidInputException) as e:
         return -1
+
 
 
 
