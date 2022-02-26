@@ -41,9 +41,3 @@ def test_catch_invalid_input():
     assert -1 == checkout_solution.checkout("1234")
     assert -1 == checkout_solution.checkout("ABCa")
     assert -1 == checkout_solution.checkout("AxA")
-
-
-
-
-
-

@@ -46,10 +46,10 @@ def apply_discount_factor(stock_item: STOCK_LIST_BY_SKUS, index: int):
 def validate_input(skus):
     for sku in skus:
         for _, sku_code in enumerate(list(sku)):
-            if sku_code in ['A', 'B', 'C', 'D']:
-                return True
-        else:
-            raise Exception("Invalid input detected")
+            if sku_code not in ['A', 'B', 'C', 'D']:
+                raise Exception("Invalid input detected")
+    
+    return True
     
 
 def checkout(skus: str):
@@ -81,13 +81,4 @@ def checkout(skus: str):
 
     except Exception:
         return -1
-
-
-
-
-
-
-
-
-
 
