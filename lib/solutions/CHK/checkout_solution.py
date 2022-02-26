@@ -12,12 +12,15 @@ STOCK_LIST_BY_SKUS = (
     
 
 def checkout(skus):
+    price = 0
     skus_to_list = skus.split(',')
-    t = STOCK_LIST_BY_SKUS
 
     for sku in skus_to_list:
-        item_price = [item for item in t]
-    breakpoint()
+        for stock_item in STOCK_LIST_BY_SKUS:
+            label = stock_item[0]
+            price += 
+            breakpoint()
     raise NotImplementedError()
+
 
 
