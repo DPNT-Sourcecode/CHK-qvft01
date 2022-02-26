@@ -28,7 +28,7 @@ def get_discount_factor(discount_type):
     if discount_type == Offers.BUY_2A_FOR_45.value[0]:
         return 2, 15
 
-    return None
+    return None, None
 
 
 def apply_discount_factor(stock_item, counter: int):
@@ -52,14 +52,12 @@ def checkout(skus):
                     # process logic
                     for index, _ in enumerate(list(skus)):
                         price += apply_discount_factor(stock_item, index)
-
-        breakpoint()
         
         return price
 
-    except Exception as e:
-        breakpoint()
+    except Exception:
         return -1
+
 
 
 
