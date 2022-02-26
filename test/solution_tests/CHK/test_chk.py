@@ -30,5 +30,3 @@ def test_special_offers_buy_3():
 
     skus = 'A, A, A'
     assert 130 == checkout_solution.checkout(skus)
-
-

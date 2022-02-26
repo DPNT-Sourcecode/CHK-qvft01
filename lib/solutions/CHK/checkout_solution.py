@@ -17,26 +17,19 @@ STOCK_LIST = [
     {'sku': 'D', 'price': 15, 'offer': None},
 
 ]
+
+def validate_item_in_stock(sku):
+    
     
 
 def checkout(skus):
     price = 0
     skus_to_list = skus.split(',')
 
-    breakpoint()
-
-    for sku in skus_to_list:
-        for stock_item in STOCK_LIST:
-            
-
     for sku in skus_to_list:
         for stock_item in STOCK_LIST_BY_SKUS:
             label = stock_item[0]
             if label == sku:
                 price += stock_item[1]
-    raise NotImplementedError()
-
-
-
-
-
+    
+    return price
