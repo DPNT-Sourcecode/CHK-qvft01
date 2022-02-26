@@ -52,12 +52,19 @@ def calculate_price(list):
         final_price += item.values()
 
     return final_price
+
+def add_to_cart(cart, item):
+
+    for existing_item in cart:
+        if item.keys() in existing_item:
+            breakpoint()
+        
     
 
 def checkout(skus):
     skus_to_list = skus.split(',')
 
-    cart = []
+    cart = [{ 'A': 50 }]
     
     try:
         for sku in skus_to_list:
@@ -74,4 +81,5 @@ def checkout(skus):
     except Exception as e:
         breakpoint()
         return -1
+
 
