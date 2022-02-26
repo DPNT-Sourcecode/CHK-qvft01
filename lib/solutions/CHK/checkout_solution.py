@@ -44,23 +44,29 @@ def apply_offer(offer, count):
         if count % 2:
             return 45
         return None
+
+def calculate_price(list):
+    final_price = 0
+    for item in list:
+        breakpoint()
+        final_price += item.values()
+
+    return final_price
     
 
 def checkout(skus):
-    price = 0
     skus_to_list = skus.split(',')
 
     cart = []
-
-    breakpoint()
     
     try:
         for sku in skus_to_list:
             for stock_item in STOCK_LIST_BY_SKUS:
                 label = stock_item[0]
                 if label == sku:
-                    cart.push({ sku: stock_item[1] })
+                    cart.append({ sku: stock_item[1] })
 
+        price = calculate_price(cart)
         breakpoint()
         
         return price
@@ -68,12 +74,4 @@ def checkout(skus):
     except Exception as e:
         breakpoint()
         return -1
-
-
-
-
-
-
-
-
 
