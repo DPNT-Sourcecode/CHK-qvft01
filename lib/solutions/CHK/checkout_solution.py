@@ -85,6 +85,7 @@ class ShoppingCart:
     
     def _apply_discount(self, product: object, item: str) -> None:
         quantity = product['quantity']
+        breakpoint()
         get_discount_for_product = self.discount_list.get(f'{quantity}{item}', None)
 
         if get_discount_for_product:
@@ -156,6 +157,7 @@ def checkout(skus: str):
         return cart.total
     except (Exception, InvalidInputException) as e:
         return -1
+
 
 
 
