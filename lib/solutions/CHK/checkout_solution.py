@@ -9,32 +9,38 @@ class LoadingFactors:
     def __init__(self):
         self.discount_list = {
             '3A': {
-                'discount_percent': 60,
+                'discount': 20,
                 'shared_products': None,
             },
             '5A': {
-                'discount_percent': 25,
+                'discount': 50,
                 'shared_products': None,
             },
             '2B': {
                 'rule': 2,
-                'discount_percent': 50,
+                'discount': 15,
                 'shared_products': None,
-            },
-            '2E': {
-                'rule': 2,
-                'discount_percent': None,
-                'shared_products': {
-                    'B': {
-                        'action': '1 free'
-                    }
-                }
             }
         }
 
     def process_A_discounts(self, product, product_list=None):
         if product['quantity'] == 3:
-            get_discount_for_product = g
+            get_discount_for_product = self.discount_list['3A']
+            discount_to_apply = get_discount_for_product['discount']
+            product['total_price'] = 0
+            new_total = product['price'] * 3
+            product['total_price'] = (new_total - discount_to_apply)
+            return
+        
+        if product['quantity'] == 5:
+            get_discount_for_product = self.discount_list['5A']
+            discount_to_apply = get_discount_for_product['discount']
+            product['total_price'] = 0
+            new_total = product['price'] * 5
+            product['total_price'] = (new_total - discount_to_apply)
+            return
+
+        product['total_price'] += product['price']
 
 
 class ShoppingCart:
@@ -58,22 +64,22 @@ class ShoppingCart:
             'A': {
                 'price': 50,
                 'quantity': 0,
-                'discounted_items': 0,
+                'total_price': 0,
             },
             'B': {
                 'price': 30,
                 'quantity': 0,
-                'discounted_items': 0,
+                'total_price': 0,
             },
             'C': {
                 'price': 20,
                 'quantity': 0,
-                'discounted_items': 0,
+                'total_price': 0,
             },
             'D': {
                 'price': 15,
                 'quantity': 0,
-                'discounted_items': 0,
+                'total_price': 0,
             },
             'E': {
                 'price': 40,
@@ -173,5 +179,6 @@ def checkout(skus: str):
         return cart.total
     except (Exception, InvalidInputException) as e:
         return -1
+
 
 
