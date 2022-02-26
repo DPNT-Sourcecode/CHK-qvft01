@@ -57,6 +57,46 @@ def validate_input(skus):
 
 
 
+class ShoppingCart:
+
+    def __init__(self):
+        self.products = {
+            'A': {
+                'price': 50,
+                'quantity': 0,
+            },
+            'B': {
+                'price': 30,
+                'quantity': 0,
+            },
+            'C': {
+                'price': 20,
+                'quantity': 0,
+            },
+            'D': {
+                'price': 15,
+                'quantity': 0,
+            }
+        }
+
+        self.discount_list = {
+            'A': {
+                'rule': 3,
+                'discount_percent': 60,
+            }
+        }
+
+        self.total = 0
+
+        self.shopping_cart = {}
+
+    def add_item(self, item):
+        product = self.products[item]
+        product['quantity'] += 1
+
+        self.shopping_cart.update({ item: product })
+
+    
 
 
     
@@ -76,6 +116,7 @@ def checkout(skus: str):
     int
         Returns int price
     """
+
     incoming_skus = ["".join(group) for _, group in groupby(sorted(skus))]
     price = 0
     try:
@@ -90,4 +131,5 @@ def checkout(skus: str):
 
     except Exception:
         return -1
+
 
