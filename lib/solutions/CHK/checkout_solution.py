@@ -50,6 +50,15 @@ def validate_input(skus):
                 raise Exception("Invalid input detected")
     
     return True
+
+
+
+
+
+
+
+
+
     
 
 def checkout(skus: str):
