@@ -28,8 +28,11 @@ def validate_item_in_stock(sku):
 
         raise Exception("Invalid input")
 
-def validate_special_offer(offer):
-    
+def eligable_for_offer(offer, count):
+    if offer == '3A for 130':
+        if count % 3:
+            return True
+        return False
 
 def checkout(skus):
     price = 0
@@ -37,16 +40,17 @@ def checkout(skus):
 
     psudo_skus = ['A', 'B', 'A']
 
-    stock_count = []
-
     try:
         for sku in skus_to_list:
             for stock_item in STOCK_LIST_BY_SKUS:
                 local_stock_count = []
                 label = stock_item[0]
                 if label == sku:
-                    if stock_item[3]:
-                        local_stock_count.push(sku)
+                    local_stock_count.push(sku)
+                    offer = stock_item[3]
+                    if offer:
+                        if eligable_for_offer(offer, len(local_stock_count)):
+
                             
                     price += stock_item[1]
         
@@ -54,6 +58,7 @@ def checkout(skus):
 
     except Exception:
         return -1
+
 
 
 
