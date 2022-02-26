@@ -9,6 +9,10 @@ STOCK_LIST_BY_SKUS = (
         ('C', 20, None),
         ('D', 15, None)
     )
+
+STOCK_LIST = [
+    {'sku': 'A', 'price': 50, }
+]
     
 
 def checkout(skus):
@@ -18,9 +22,11 @@ def checkout(skus):
     for sku in skus_to_list:
         for stock_item in STOCK_LIST_BY_SKUS:
             label = stock_item[0]
-            price += 
+            if label == sku:
+                price += stock_item[1]
             breakpoint()
     raise NotImplementedError()
+
 
 
 
