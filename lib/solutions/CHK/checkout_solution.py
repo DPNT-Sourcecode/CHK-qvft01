@@ -143,25 +143,19 @@ def checkout(skus: str):
         allowed_input_values = ["".join(key) for key in cart.products.keys()]
 
         if not all(allowed_string in allowed_input_values for allowed_string in skus):
-            raise InvalidInputException()    
-        incoming_skus = ["".join(group) for _, group in groupby(sorted(skus))]    
-    except Exception:
-        pass
-
-    incoming_skus = ["".join(group) for _, group in groupby(sorted(skus))]
-    price = 0
-    try:
-        validate_input(incoming_skus)
-        for stock_item in STOCK_LIST_BY_SKUS:
-            for skus in incoming_skus:
-                if stock_item[0] == skus[0]:
-                    for index, _ in enumerate(list(skus)):
-                        price += apply_discount_factor(stock_item, index)
+            raise InvalidInputException("Invalid input provided")    
         
-        return price
+        incoming_skus = ["".join(group) for _, group in groupby(sorted(skus))]    
 
-    except Exception:
+        for sublist in incoming_skus:
+            for _, item in enumerate(sublist):
+                cart.add_item(item)
+
+        return cart.total
+    except (Exception, InvalidInputException) as e:
+        breakpoint()
         return -1
+
 
 
 
