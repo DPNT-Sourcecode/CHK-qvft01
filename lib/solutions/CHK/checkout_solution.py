@@ -38,6 +38,10 @@ class ShoppingCart:
             'D': {
                 'price': 15,
                 'quantity': 0,
+            },
+            'E': {
+                'price': 40,
+                'quantity': 0,
             }
         }
 
@@ -49,6 +53,15 @@ class ShoppingCart:
             'B': {
                 'rule': 2,
                 'discount_percent': 50,
+            },
+            'E': {
+                'rule': 2,
+                'discount_percent': None,
+                'shared_products': {
+                    'B': {
+                        'action': '1 free'
+                    }
+                }
             }
         }
 
@@ -65,21 +78,31 @@ class ShoppingCart:
         self._apply_discount(product, item)
 
     
-    def _apply_discount(self, product, item):
+    def _apply_discount(self, product: object, item: str) -> None:
         get_discount_for_product = self.discount_list.get(item, None)
 
         if get_discount_for_product:
             if product['quantity'] % get_discount_for_product['rule'] == 0:
                 percentage = get_discount_for_product['discount_percent']
+                shared_products = get_discount_for_product['shared_products']
                 
                 if percentage:
                     discount = int((product['price'] * percentage) / 100)
                     self.total += discount
 
+                if shared_products:
+                    self._apply_shared_discount(product, shared_products)
+
             else:
                 self.total += product['price'] * 1
         else:
             self.total += product['price'] * 1
+
+    def _apply_shared_discount(self, product, shared_product):
+        shared_products_keys = shared_product.keys()
+        
+
+
 
     
 
@@ -119,8 +142,8 @@ def checkout(skus: str):
 
         return cart.total
     except (Exception, InvalidInputException) as e:
-        breakpoint()
         return -1
+
 
 
 
