@@ -3,6 +3,7 @@
 # noinspection PyUnusedLocal
 # skus = unicode string
 
+from ast import Load
 from itertools import groupby
 
 class LoadingFactors:
@@ -42,6 +43,27 @@ class LoadingFactors:
 
         product['total_price'] += product['price']
 
+    def process_B_discounts(self, product, product_list=None):
+        if product['quantity'] == 3:
+            get_discount_for_product = self.discount_list['2B']
+            discount_to_apply = get_discount_for_product['discount']
+            product['total_price'] = 0
+            new_total = product['price'] * 2
+            product['total_price'] = (new_total - discount_to_apply)
+            return
+
+        product['total_price'] += product['price']
+
+    def process_E_discounts(self, product, product_list):
+        if product['quantity'] == 2:
+            if product_list['B']['quantity'] >= 1:
+                product_list['B']['total_price'] -= product_list['B']['price']
+            
+            product['total_price'] += product['price']
+            return
+
+        product['total_price'] += product['price']
+
 
 class ShoppingCart:
 
@@ -60,16 +82,19 @@ class ShoppingCart:
     """
 
     def __init__(self):
+        loading_factors = LoadingFactors()
         self.products = {
             'A': {
                 'price': 50,
                 'quantity': 0,
                 'total_price': 0,
+                'loading_factor': loading_factors.process_A_discounts
             },
             'B': {
                 'price': 30,
                 'quantity': 0,
                 'total_price': 0,
+                'loading_factor': loading_factors.process_B_discounts
             },
             'C': {
                 'price': 20,
@@ -85,6 +110,7 @@ class ShoppingCart:
                 'price': 40,
                 'quantity': 0,
                 'discounted_items': 0,
+                'loading_factor': loading_factors.process_E_discounts
             }
         }
 
@@ -179,6 +205,7 @@ def checkout(skus: str):
         return cart.total
     except (Exception, InvalidInputException) as e:
         return -1
+
 
 
 
