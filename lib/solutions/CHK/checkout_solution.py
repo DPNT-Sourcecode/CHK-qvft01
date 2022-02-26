@@ -83,6 +83,10 @@ class ShoppingCart:
             'A': {
                 'rule': 3,
                 'discount_percent': 60,
+            },
+            'B': {
+                'rule': 2,
+                'discount_percent': 50,
             }
         }
 
@@ -95,6 +99,21 @@ class ShoppingCart:
         product['quantity'] += 1
 
         self.shopping_cart.update({ item: product })
+
+        self._apply_discount(product, item)
+
+    
+    def _apply_discount(self, product, item):
+        get_discount_for_product = self.discount_list[item]
+        if product['quantity'] % get_discount_for_product['rule'] == 0:
+            percentage = get_discount_for_product['discount_percent']
+            
+            if percentage:
+                discount = int((product['price'] * percentage) / 100)
+                self.total += discount
+
+        else:
+            self.total += product['price'] * 1
 
     
 
@@ -131,5 +150,6 @@ def checkout(skus: str):
 
     except Exception:
         return -1
+
 
 
