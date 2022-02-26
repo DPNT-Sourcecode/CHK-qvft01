@@ -31,5 +31,15 @@ def checkout(skus):
     skus_to_list = skus.split(',')
 
     try:
+        for sku in skus_to_list:
+            for stock_item in STOCK_LIST_BY_SKUS:
+                label = stock_item[0]
+                if label == sku:
+                    price += stock_item[1]
+        
+        return price
 
-    e
+    except Exception:
+        return -1
+
+
