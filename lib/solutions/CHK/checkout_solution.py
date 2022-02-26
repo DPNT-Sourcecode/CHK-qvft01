@@ -34,7 +34,7 @@ def get_discount_factor(discount_type):
 def apply_discount_factor(stock_item, counter: int):
     discount_factor, discounted_price = get_discount_factor(stock_item[2])
 
-    if discount_factor:
+    if discount_factor and counter > 0:
         if counter % discount_factor == 0:
             return discounted_price
         else:
@@ -52,11 +52,13 @@ def checkout(skus):
                     # process logic
                     for index, _ in enumerate(list(skus)):
                         price += apply_discount_factor(stock_item, index)
+                        breakpoint()
         
         return price
 
     except Exception:
         return -1
+
 
 
 
