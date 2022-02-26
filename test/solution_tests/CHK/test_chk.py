@@ -17,7 +17,7 @@ def test_add_multiple_to_checkout():
 
 def test_special_offers_buy_2():
     skus = 'B'
-    assert 15 == checkout_solution.checkout(skus)
+    assert 30 == checkout_solution.checkout(skus)
     
     skus = 'BB'
     assert 45 == checkout_solution.checkout(skus)
@@ -36,3 +36,4 @@ def test_multiple_product_discounts():
     skus = 'AAABBAAA'
 
     assert 305 == checkout_solution.checkout(skus)
+
