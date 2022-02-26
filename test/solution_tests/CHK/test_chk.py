@@ -29,14 +29,10 @@ def test_special_offers_buy_3():
     skus = 'AA'
     assert 100 == checkout_solution.checkout(skus)
 
-    skus = 'AA'
+    skus = 'AAA'
     assert 130 == checkout_solution.checkout(skus)
 
 def test_multiple_product_discounts():
     skus = 'AAABBAAA'
 
     assert 305 == checkout_solution.checkout(skus)
-
-
-
-
