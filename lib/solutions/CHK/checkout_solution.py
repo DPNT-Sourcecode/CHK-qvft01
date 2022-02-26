@@ -96,7 +96,6 @@ class ShoppingCart:
 
         if get_discount_for_product:
             for rule in get_discount_for_product:
-                breakpoint()
                 if product["quantity"] % rule["rule"] == 0:
                     breakpoint()
                     percentage = rule["discount_percent"]
@@ -162,5 +161,6 @@ def checkout(skus: str):
         return cart.total
     except (Exception, InvalidInputException) as e:
         return -1
+
 
 
