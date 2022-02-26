@@ -19,17 +19,17 @@ STOCK_LIST = [
 ]
 
 def validate_item_in_stock(sku):
-    
+    for stock_item in STOCK_LIST_BY_SKUS:
+        if sku in stock_item:
+            return 0
+
+        raise Exception("Invalid input")
     
 
 def checkout(skus):
     price = 0
     skus_to_list = skus.split(',')
 
-    for sku in skus_to_list:
-        for stock_item in STOCK_LIST_BY_SKUS:
-            label = stock_item[0]
-            if label == sku:
-                price += stock_item[1]
-    
-    return price
+    try:
+
+    e
