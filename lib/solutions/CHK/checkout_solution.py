@@ -6,6 +6,7 @@
 from itertools import groupby
 
 from enum import Enum
+from operator import truediv
 
 class Offers(Enum):
     BUY_3A_FOR_130 = '3A for 130',
@@ -42,6 +43,13 @@ def apply_discount_factor(stock_item: STOCK_LIST_BY_SKUS, index: int):
             return stock_item[1]
     else:
         return stock_item[1]
+
+def validate_input(skus):
+    for stock_item in STOCK_LIST_BY_SKUS:
+        if skus in stock_item:
+            return True
+
+        raise Exception("Not valid input")
     
 
 def checkout(skus: str):
@@ -62,6 +70,7 @@ def checkout(skus: str):
     incoming_skus = ["".join(group) for _, group in groupby(sorted(skus))]
     price = 0
     try:
+        validate_input(skus)
         for stock_item in STOCK_LIST_BY_SKUS:
             for skus in incoming_skus:
                 if stock_item[0] == skus[0]:
@@ -72,6 +81,7 @@ def checkout(skus: str):
 
     except Exception:
         return -1
+
 
 
 
