@@ -24,27 +24,28 @@ def validate_item_in_stock(sku):
             return 0
 
         raise Exception("Invalid input")
-
-def special_offers
     
 
 def checkout(skus):
     price = 0
     skus_to_list = skus.split(',')
 
+    psudo_skus = ['A', 'B', 'A']
+
+    stock_count = []
+
     try:
         for sku in skus_to_list:
             for stock_item in STOCK_LIST_BY_SKUS:
                 label = stock_item[0]
                 if label == sku:
-                    if stock_item[3]:
-
                     price += stock_item[1]
         
         return price
 
     except Exception:
         return -1
+
 
 
 
