@@ -5,6 +5,38 @@
 
 from itertools import groupby
 
+class LoadingFactors:
+    def __init__(self):
+        self.discount_list = {
+            '3A': {
+                'discount_percent': 60,
+                'shared_products': None,
+            },
+            '5A': {
+                'discount_percent': 25,
+                'shared_products': None,
+            },
+            '2B': {
+                'rule': 2,
+                'discount_percent': 50,
+                'shared_products': None,
+            },
+            '2E': {
+                'rule': 2,
+                'discount_percent': None,
+                'shared_products': {
+                    'B': {
+                        'action': '1 free'
+                    }
+                }
+            }
+        }
+
+    def process_A_discounts(self, product, product_list=None):
+        if product['quantity'] == 3:
+            get_discount_for_product = g
+
+
 class ShoppingCart:
 
     """
@@ -47,31 +79,6 @@ class ShoppingCart:
                 'price': 40,
                 'quantity': 0,
                 'discounted_items': 0,
-            }
-        }
-
-        self.discount_list = {
-            '3A': {
-                'discount_percent': 60,
-                'shared_products': None,
-            },
-            '5A': {
-                'discount_percent': 25,
-                'shared_products': None,
-            },
-            '2B': {
-                'rule': 2,
-                'discount_percent': 50,
-                'shared_products': None,
-            },
-            '2E': {
-                'rule': 2,
-                'discount_percent': None,
-                'shared_products': {
-                    'B': {
-                        'action': '1 free'
-                    }
-                }
             }
         }
 
@@ -166,4 +173,5 @@ def checkout(skus: str):
         return cart.total
     except (Exception, InvalidInputException) as e:
         return -1
+
 
