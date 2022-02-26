@@ -83,5 +83,3 @@ def checkout(skus):
         breakpoint()
         return -1
 
-
-
