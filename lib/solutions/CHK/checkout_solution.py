@@ -36,21 +36,21 @@ def validate_item_in_stock(sku):
 def apply_offer(offer, count):
     if offer == Offers.BUY_3A_FOR_130.value:
         if count % 3:
-            return True
-        return False
+            return 130
+        return None
 
     if offer == Offers.BUY_2A_FOR_45.value:
         if count % 2:
-            return True
-        return False
+            return 45
+        return None
     
 
 def checkout(skus):
     price = 0
     skus_to_list = skus.split(',')
 
-    psudo_skus = ['A', 'B', 'A']
-
+    cart = []
+    
     try:
         for sku in skus_to_list:
             for stock_item in STOCK_LIST_BY_SKUS:
@@ -60,7 +60,7 @@ def checkout(skus):
                     local_stock_count.push(sku)
                     offer = stock_item[3]
                     if offer:
-                        if eligable_for_offer(offer, len(local_stock_count)):
+                        price += apply_offer(offer, len(local_stock_count))
 
                             
                     price += stock_item[1]
@@ -69,6 +69,7 @@ def checkout(skus):
 
     except Exception:
         return -1
+
 
 
 
