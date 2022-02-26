@@ -3,7 +3,12 @@
 # noinspection PyUnusedLocal
 # skus = unicode string
 
-from re import I
+from enum import Enum
+
+class Offers(Enum):
+    BUY_3A_FOR_130 = 'BUY_3A_FOR_130',
+    BUY_2A_FOR_45 = 'BUY_2A_FOR_45',
+
 
 
 STOCK_LIST_BY_SKUS = (
@@ -28,11 +33,17 @@ def validate_item_in_stock(sku):
 
         raise Exception("Invalid input")
 
-def eligable_for_offer(offer, count):
-    if offer == '3A for 130':
+def apply_offer(offer, count):
+    if offer == Offers.BUY_3A_FOR_130.value:
         if count % 3:
             return True
         return False
+
+    if offer == Offers.BUY_2A_FOR_45.value:
+        if count % 2:
+            return True
+        return False
+    
 
 def checkout(skus):
     price = 0
@@ -58,6 +69,7 @@ def checkout(skus):
 
     except Exception:
         return -1
+
 
 
 
