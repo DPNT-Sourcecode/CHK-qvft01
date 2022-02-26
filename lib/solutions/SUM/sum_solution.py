@@ -1,5 +1,13 @@
 # noinspection PyShadowingBuiltins,PyUnusedLocal
-def compute(x: int, y: int) -> str:
+
+class ValidationError(Exception):
+    pass
+
+def validate_inputs_int(x, y):
+    if isinstance(x, int)
+    if 0 <= x <= 100 and 0 <= y <= 100:
+
+def compute(x: int, y: int) -> int:
     """
     Compute method for allowing two numbers to be summed
 
@@ -13,11 +21,13 @@ def compute(x: int, y: int) -> str:
     Returns:
     --------
 
-    str
+    int
         The summed value
     """
 
-    if 0 <= x <= 100
+    if 0 <= x <= 100 and 0 <= y <= 100:
+        return x + y
     
     raise NotImplementedError()
+
 
