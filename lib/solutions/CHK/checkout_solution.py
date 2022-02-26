@@ -21,20 +21,29 @@ STOCK_LIST_BY_SKUS = (
     )
 
 def get_discount_factor(discount_type):
-    if discount_type == 
+    if discount_type == Offers.BUY_3A_FOR_130.value:
+        # Hard coded for now
+        return 3, 30
+    
+    if discount_type == Offers.BUY_2A_FOR_45.value:
+        return 2, 15
 
-        
+
+def apply_discount_factor(stock_item: STOCK_LIST_BY_SKUS, counter: int):
+    factor =  get_discount_factor
     
 
 def checkout(skus):
     # Sort into seperate lists
     incoming_skus = ["".join(group) for _, group in groupby(sorted(skus))]
+    price = 0
     try:
-
         for stock_item in STOCK_LIST_BY_SKUS:
             for skus in incoming_skus:
                 if stock_item[0] == skus[0]:
                     # process logic
+                    for index, _ in enumerate(list(skus)):
+                        apply_discount_factor(stock_item, index)
 
         breakpoint()
         
@@ -43,5 +52,6 @@ def checkout(skus):
     except Exception as e:
         breakpoint()
         return -1
+
 
 
