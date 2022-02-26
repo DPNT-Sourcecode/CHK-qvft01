@@ -47,9 +47,13 @@ class ShoppingCart:
 
         self.discount_list = {
             'A': {
-                'rule': 3,
-                'discount_percent': 60,
-                'shared_products': None,
+                'rules': [
+                    {
+                        'rule': 3,
+                        'discount_percent': 60,
+                        'shared_products': None,
+                    },
+                ]
             },
             'B': {
                 'rule': 2,
@@ -152,11 +156,4 @@ def checkout(skus: str):
         return cart.total
     except (Exception, InvalidInputException) as e:
         return -1
-
-
-
-
-
-
-
 

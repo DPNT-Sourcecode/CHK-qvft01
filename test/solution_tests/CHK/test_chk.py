@@ -60,4 +60,3 @@ def test_shared_discount_applied_for_E_product():
     skus = 'AAAAAABBEE'
 
     assert 355 == checkout_solution.checkout(skus)
-
