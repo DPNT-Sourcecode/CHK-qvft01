@@ -53,6 +53,7 @@ class ShoppingCart:
             'B': {
                 'rule': 2,
                 'discount_percent': 50,
+                'shared_products': None,
             },
             'E': {
                 'rule': 2,
@@ -98,9 +99,16 @@ class ShoppingCart:
         else:
             self.total += product['price'] * 1
 
-    def _apply_shared_discount(self, product, shared_product):
-        shared_products_keys = shared_product.keys()
-        
+    def _apply_shared_discount(self, product, shared_products):
+        shared_products_keys = shared_products.keys()
+        for shared_item in shared_products_keys:
+            try:
+                target_shared_product = self.shopping_cart[shared_item]
+                if shared_products[shared_item]['action'] == '1 free':
+                    self.total += product['price']
+                    self.total -= target_shared_product['price']
+            except KeyError:
+                self.total += product['price']
 
 
 
@@ -143,6 +151,7 @@ def checkout(skus: str):
         return cart.total
     except (Exception, InvalidInputException) as e:
         return -1
+
 
 
 
