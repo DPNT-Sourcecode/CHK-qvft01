@@ -32,6 +32,15 @@ def test_special_offers_buy_3():
     skus = 'AAA'
     assert 130 == checkout_solution.checkout(skus)
 
+    skus = 'AAAAA'
+    assert 200 == checkout_solution.checkout(skus)
+
+    skus = 'AAAAAA'
+    assert 250 == checkout_solution.checkout(skus)
+
+    skus = 'AAAAAAA'
+    assert 300 == checkout_solution.checkout(skus)
+
 def test_multiple_product_discounts():
     skus = 'AAABBAAA'
 
@@ -51,3 +60,4 @@ def test_shared_discount_applied_for_E_product():
     skus = 'AAAAAABBEE'
 
     assert 355 == checkout_solution.checkout(skus)
+
