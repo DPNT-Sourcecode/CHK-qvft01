@@ -32,6 +32,15 @@ def test_special_offers_buy_3():
     skus = 'AAAAAAA'
     assert 300 == checkout_solution.checkout(skus)
 
+    skus = 'AAAAAAAA'
+    assert 330 == checkout_solution.checkout(skus)
+
+    skus = 'AAAAAAAAA'
+    assert 380 == checkout_solution.checkout(skus)
+
+    skus = 'AAAAAAAAAA'
+    assert 400 == checkout_solution.checkout(skus)
+
 def test_multiple_product_discounts():
     skus = 'AAABBAAA'
 

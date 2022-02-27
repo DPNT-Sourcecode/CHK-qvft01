@@ -25,23 +25,38 @@ class LoadingFactors:
         }
 
     def process_A_discounts(self, product, product_list=None):
-        if product['quantity'] == 3:
-            get_discount_for_product = self.discount_list['3A']
-            discount_to_apply = get_discount_for_product['discount']
-            product['total_price'] = 0
-            new_total = product['price'] * 3
-            product['total_price'] = (new_total - discount_to_apply)
+        quantity = product['quantity']
+
+        if quantity % 3 == 0 and quantity < 5:
+            loop_range = int(quantity / 3)
+
+            for _ in range(loop_range):
+                # do another
+                get_discount_for_product = self.discount_list['3A']
+                discount_to_apply = (product['price'] - get_discount_for_product['discount'])
+                product['total_price'] += discount_to_apply
             return
-        
-        if product['quantity'] == 5:
+
+        if (quantity - 5) % 3 == 0 and quantity > 5:
+            loop_range = int(quantity / 3)
+
+            get_discount_for_product = self.discount_list['3A']
+            discount_to_apply = (product['price'] - get_discount_for_product['discount'])
+            product['total_price'] += discount_to_apply
+            return
+            
+
+        if quantity % 5 == 0:
+            loop_range = int(quantity / 5)
+
             get_discount_for_product = self.discount_list['5A']
             discount_to_apply = get_discount_for_product['discount']
             product['total_price'] = 0
-            new_total = product['price'] * 5
-            product['total_price'] = (new_total - discount_to_apply)
+            new_total = product['price'] * quantity
+            product['total_price'] = (new_total - (discount_to_apply * loop_range))
             return
 
-        product['total_price'] += product['price']
+        product['total_price'] += product['price'] * 1
 
     def process_B_discounts(self, product, product_list=None):
         if product['quantity'] == 2:
@@ -176,4 +191,5 @@ def checkout(skus: str):
         return cart.total
     except (Exception, InvalidInputException) as e:
         return -1
+
 
